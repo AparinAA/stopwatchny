@@ -11,7 +11,7 @@
     display: grid;
     height: 100%;
     width: 100%;
-    padding: 0 10px;
+    padding: 0;
     box-sizing: border-box;
     grid-template-rows: auto 1fr auto;
 }
@@ -241,9 +241,8 @@
 .decorate {
     display: grid;
     grid-template-columns: repeat(12,minmax(20px,1fr));
-}
-.decorate::after {
-    content: url(decorate/b-ball_i1.png);
+    background-image: url(decorate/b-head-decor_newyear.png);
+
 }
 
 .decorate-ball-1 {
