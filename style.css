@@ -33,7 +33,7 @@
     text-align: center;
     font-size: 9vh;
     font-family: 'Matterhorn [Rus by me]';
-    color: rgb(255, 255, 255);
+    color: rgb(196, 219, 248);
     letter-spacing: 1px;
     background-image: url(decorate/b-head-decor_newyear.png);
     background-position: 0 -25px;
@@ -128,7 +128,7 @@
     grid-column: 1/3;
     font-family: 'Matterhorn [Rus by me]';
     font-size: 4vw;
-    color: rgb(255, 255, 255);
+    color: rgb(196, 219, 248);
     padding: 5px;
 }
 .card-1,
