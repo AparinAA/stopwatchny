@@ -86,20 +86,6 @@ function stopwatch (...args) {
 
 }
 
-function ball () {
-    let decorate = document.querySelector(".decorate");
-    
-    decorate.onmouseover = (event) => {
-        if (event.target.closest('div')) {
-            console.info(event.target.closest('div'));
-        }
-        
-        
-
-    };
-}
-
-ball();
 stopwatch(2021,11,"31",21,20,40);
 
 function ballBounce(e) {

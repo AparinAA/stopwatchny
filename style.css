@@ -243,14 +243,24 @@
     grid-template-columns: repeat(12,minmax(20px,1fr));
 }
 
+.decorate-ball-1 {
+    background: url(decorate/b-ball_i1.png) no-repeat;
+}
+
 .ball-1 {
     content: url(decorate/b-ball_n1.png);
 }
 
+.decorate-ball-2 {
+    background: url(decorate/b-ball_i2.png) no-repeat;
+}
 .ball-2 {
     content: url(decorate/b-ball_n2.png);
 }
 
+.decorate-ball-3 {
+    background: url(decorate/b-ball_i3.png) no-repeat;
+}
 .ball-3 {
     content: url(decorate/b-ball_n3.png);
 }
