@@ -28,7 +28,7 @@ function stopwatch (...args) {
         min, // текущие минуты
         h, // текущие часы
         d, // текущие дни
-
+        countdown, //создаем обратный осчет когда осталося < 10sec
         timeId = setTimeout( function tick (date) { //Объявление сеттайм с таймаутом 1000мс, который имитирует секунды
                                                    //И коллбэк, который высчитывает обратный отсчет отнимая по 1 сек каждый ее запуск
             sec = (date - new Date())/1000;
@@ -57,7 +57,26 @@ function stopwatch (...args) {
             name_min.innerHTML = min < 5 && min > 0 ? "минуты" : "минут";
             name_sec.innerHTML = sc < 5 && sc > 0 ? "секунды" : "секунд";
             
+            if (d && !h && !min && sc == 10) {
+                countdown = document.createElement("div");
+                countdown.classList.add('countdown');
+                countdown.innerHTML = sc;
+                document.querySelector('.container').appendChild(countdown);
+                document.querySelector('.container').style = 'background-color: rgba(0, 0, 0, 0.363);';
+                document.querySelector('.stopwatch').style = 'opacity: 0.1;';
+            } 
+            if (d && !h && !min && sc < 10) {
+                countdown.innerHTML = sc;
+            }
+            
             if (!d && !h && !min && !sc) {
+                    if ( document.querySelector('.countdown') ){
+                        setTimeout ( () =>{
+                            document.querySelector('.countdown').remove();
+                            document.querySelector('.feerverk').style.display = block;
+                        }
+                        ,1000)
+                    }
                 clearTimeout(timeId);
             }
             else{
@@ -67,4 +86,57 @@ function stopwatch (...args) {
 
 }
 
-stopwatch(2021,11,"31",23,59,59);
+function ball () {
+    let decorate = document.querySelector(".decorate");
+    
+    decorate.onmouseover = (event) => {
+        if (event.target.closest('div')) {
+            console.info(event.target.closest('div'));
+        }
+        
+        
+
+    };
+}
+
+ball();
+stopwatch(2021,11,"31",21,20,40);
+
+function ballBounce(e) {
+    var i = e;
+    if (e.className.indexOf(" bounce") > -1) {
+      return;
+    }
+    toggleBounce(i);
+  }
+  
+function toggleBounce(i) {
+    i.classList.add("bounce");
+    function n() {
+        i.classList.remove("bounce");
+        i.classList.add("bounce1");
+        function o() {
+        i.classList.remove("bounce1");
+        i.classList.add("bounce2");
+        function p() {
+            i.classList.remove("bounce2");
+            i.classList.add("bounce3");
+            function q() {
+            i.classList.remove("bounce3");
+            }
+            setTimeout(q, 500);
+        }
+        setTimeout(p, 500);
+        }
+        setTimeout(o, 500);
+    }
+    setTimeout(n, 500);
+}
+
+var array1 = document.querySelectorAll('.ball');
+
+for (var i = 0; i < array1.length; i++) {
+array1[i].addEventListener('mouseenter', function () {
+    ballBounce(this);
+});
+}

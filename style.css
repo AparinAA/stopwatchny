@@ -17,11 +17,15 @@
 }
 
 .header {
-    background-color: cadetblue;
     text-align: center;
-    font-size: 32px;
+    font-size: 42px;
     font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: rgb(82, 81, 81);
     letter-spacing: 1px;
+    background-image: url(decorate/b-head-decor_newyear.png);
+    background-position: 0 -25px;
+    height: 90px;
 }
 
 .container {
@@ -52,11 +56,49 @@
     text-align: center;
 }
 
+.countdown {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: 10px 5px;
+    transform: translate(-50%,-50%);
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(248, 51, 51);
+    font-size: 15px;
+    opacity: 1;
+    z-index: 900;
+    animation: pulsCount 1s infinite;
+}
+
+.ny {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: 10px;
+    transform: translate(-50%,-50%);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10vw;
+    z-index: 100;
+}
+
+@keyframes pulsCount {
+    0% {
+        font-size: 15px;
+        opacity: 1;
+    }
+
+    100% {
+        font-size: 80vh;
+        opacity: 0.7;
+    }
+}
 .stopwatch {
     display: flex;
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
 }
 
 
@@ -88,4 +130,160 @@
 
 .card-2 {
     margin-left: 2px;
+}
+
+
+/*феерверк*/
+.feerverk {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 300;
+}
+
+.feerverk__1 {
+    position: absolute;
+    top: 15%;
+    left: 7%;
+    height: 20%;
+    width: 20%;
+}
+
+.feerverk__2 {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    height: 20%;
+    width: 20%;
+}
+
+.feerverk__3 {
+    position: absolute;
+    top: 15%;
+    right: 10%;
+    height: 20%;
+    width: 20%;
+}
+
+.feerverk__1__light-1 {
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    height: 10%;
+    width: 7%;
+    background-image: url(svg/light_green.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.feerverk__1__light-2 {
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    height: 10%;
+    width: 7%;
+    background-image: url(svg/light_blue.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.feerverk__1__light-3 {
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    height: 10%;
+    width: 7%;
+    background-image: url(svg/light_yel.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.feerverk__1__light-4 {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    height: 10%;
+    width: 7%;
+    background-image: url(svg/light_red.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.feerverk__1__light-5 {
+    position: absolute;
+    top: 55%;
+    left: 20%;
+    height: 10%;
+    width: 7%;
+    background-image: url(svg/light_purple.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;  
+}
+
+.feerverk > * {
+    animation: strike 3s ease-in infinite;
+}
+
+@keyframes strike {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.decorate {
+    display: grid;
+    grid-template-columns: repeat(12,minmax(20px,1fr));
+}
+
+.ball-1 {
+    content: url(decorate/b-ball_n1.png);
+}
+
+.ball-2 {
+    content: url(decorate/b-ball_n2.png);
+}
+
+.ball-3 {
+    content: url(decorate/b-ball_n3.png);
+}
+
+.ball-4 {
+    content: url(decorate/b-ball_n4.png);
+}
+
+.ball-5 {
+    content: url(decorate/b-ball_n5.png);
+}
+
+.ball-6 {
+    content: url(decorate/b-ball_n6.png);
+}
+
+.ball {
+    transform-origin: 50% 0;
+    transition:all 0.5s ease-in-out;
+}
+
+.bounce {
+    transform: rotate(15deg);
+}
+
+.bounce1 {
+    transform: rotate(-13deg);
+}
+
+.bounce2 {
+    transform: rotate(7deg);
+}
+
+.bounce3 {
+    transform: rotate(-4deg);
 }
