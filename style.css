@@ -25,7 +25,7 @@
     letter-spacing: 1px;
     background-image: url(decorate/b-head-decor_newyear.png);
     background-position: 0 -25px;
-    height: 100px;
+    height: 90px;
 }
 
 .container {
@@ -241,6 +241,9 @@
 .decorate {
     display: grid;
     grid-template-columns: repeat(12,minmax(20px,1fr));
+}
+.decorate::after {
+    content: url(decorate/b-ball_i1.png);
 }
 
 .decorate-ball-1 {
