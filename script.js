@@ -119,16 +119,25 @@ function toggleBounce(i) {
     setTimeout(n, 500);
 }
 
-var array1 = document.querySelectorAll('.ball');
+var array = document.querySelectorAll('.ball');
 
-for (let i = 0; i < array1.length; i++) {
-    array1[i].addEventListener('mouseenter', function () {
+for (let i = 0; i < array.length; i++) {
+    array[i].addEventListener('mouseenter', function () {
         ballBounce(this);
     });
 }
 
-for (let i = 0; i < array1.length; i++) {
-    array1[i].addEventListener('click', function () {
+for (let i = 0; i < array.length; i++) {
+    array[i].addEventListener('click', function () {
         ballBounce(this);
     });
 }
+
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+setInterval( () => {
+    ballBounce(array[getRandomInt(12)]);
+}, 5000);
