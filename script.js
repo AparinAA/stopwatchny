@@ -121,8 +121,14 @@ function toggleBounce(i) {
 
 var array1 = document.querySelectorAll('.ball');
 
-for (var i = 0; i < array1.length; i++) {
-array1[i].addEventListener('mouseenter', function () {
-    ballBounce(this);
-});
+for (let i = 0; i < array1.length; i++) {
+    array1[i].addEventListener('mouseenter', function () {
+        ballBounce(this);
+    });
+}
+
+for (let i = 0; i < array1.length; i++) {
+    array1[i].addEventListener('click', function () {
+        ballBounce(this);
+    });
 }
