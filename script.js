@@ -140,4 +140,4 @@ function getRandomInt(max) {
 
 setInterval( () => {
     ballBounce(array[getRandomInt(12)]);
-}, 5000);
+}, 10000);
