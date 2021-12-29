@@ -44,7 +44,7 @@
     font-size: 9vh;
 }
 
-@media screen and (max-height: 360px){
+@media screen and (max-height: 300px){
     .text {
         display: none;
     }
