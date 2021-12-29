@@ -236,7 +236,26 @@
 }
 
 .feerverk > * {
+    -webkit-animation: strike 3s ease-in infinite;
+    -moz-animation: strike 3s ease-in infinite;
+    -o-animation: strike 3s ease-in infinite;
     animation: strike 3s ease-in infinite;
+}
+
+@-webkit-keyframes strike {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: scale(2);
+        -moz-transform: scale(2);
+        -o-transform: scale(2);
+        transform: scale(2);
+        opacity: 0;
+    }
 }
 
 @keyframes strike {
@@ -247,6 +266,9 @@
         opacity: 1;
     }
     100% {
+        -webkit-transform: scale(2);
+        -moz-transform: scale(2);
+        -o-transform: scale(2);
         transform: scale(2);
         opacity: 0;
     }
@@ -284,22 +306,40 @@
 }
 
 .ball {
+    -webkit-transform-origin: 50% 0;
+    -moz-transform-origin: 50% 0;
+    -o-transform-origin: 50% 0;
     transform-origin: 50% 0;
-    transition:all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 .bounce {
+    -webkit-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    -o-transform: rotate(15deg);
     transform: rotate(15deg);
 }
 
 .bounce1 {
+    -webkit-transform: rotate(-13deg);
+    -moz-transform: rotate(-13deg);
+    -o-transform: rotate(-13deg);
     transform: rotate(-13deg);
 }
 
 .bounce2 {
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
     transform: rotate(7deg);
 }
 
 .bounce3 {
+    -webkit-transform: rotate(-4deg);
+    -moz-transform: rotate(-4deg);
+    -o-transform: rotate(-4deg);
     transform: rotate(-4deg);
 }
