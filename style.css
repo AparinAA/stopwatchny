@@ -27,7 +27,6 @@
     box-sizing: border-box;
     grid-template-rows: auto 1fr auto;
     background: url(bg.jpg) no-repeat;
-    background-position: 0 80%;
     background-size: 100% 100%;
 }
 
