@@ -57,7 +57,7 @@ function stopwatch (...args) {
             name_min.innerHTML = min < 5 && min > 0 ? "минуты" : "минут";
             name_sec.innerHTML = sc < 5 && sc > 0 ? "секунды" : "секунд";
             
-            if (d && !h && !min && sc == 10) {
+            if (!d && !h && !min && sc == 10) {
                 countdown = document.createElement("div");
                 countdown.classList.add('countdown');
                 countdown.innerHTML = sc;
@@ -65,7 +65,7 @@ function stopwatch (...args) {
                 document.querySelector('.container').style = 'background-color: rgba(0, 0, 0, 0.363);';
                 document.querySelector('.stopwatch').style = 'opacity: 0.1;';
             } 
-            if (d && !h && !min && sc < 10) {
+            if (!d && !h && !min && sc < 10) {
                 countdown.innerHTML = sc;
             }
             
