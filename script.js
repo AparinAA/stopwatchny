@@ -1,29 +1,45 @@
-function stopwatch (...args) {
+//функция для выбора нужного сколения к словам "секунда, минута, час, день, год" в зависимости от числа
+function switchWord (value, word) {
+    let value1,
+        words = {
+            'second' : ['секунда',"секунд", "сенкунды"],
+            'minut' : ['минута', "минут", "минуты"],
+            'hour' : ['час', "часов", "часа"],
+            'day' : ['день',"дней","дня"],
+            "year" : ['год', "лет", "года"]
+        };
 
+    value = Math.abs(value) % 100;
+    value1 = value % 10;
     
+    return words[word][ (value > 4 && value < 21 || value1 == 0 || value1 > 4 && value1 < 10) ? 1 : value1 > 1 && value1 < 5 ? 2 : 0 ];
+}
+
+function stopwatch (...args) {
     const inValid = [...args].some( (arg) => { return isNaN(Number(arg)) }) || (arguments.length ? false : true);
     if ( inValid ) {
         console.info("Invalid Date");
         return;
     }
 
-    let date = new Date(...args),
+    let date = new Date(...args), //дата до которой отсчитывается время
         // DOM-элемнты секундамера
         // ==================================================
-        day_1_DOM = document.querySelector(".day .card-1"),
-        day_2_DOM = document.querySelector(".day .card-2"),
-        hour_1_DOM = document.querySelector(".hour .card-1"),
-        hour_2_DOM = document.querySelector(".hour .card-2"),
-        min_1_DOM = document.querySelector(".min .card-1"),
-        min_2_DOM = document.querySelector(".min .card-2"),
-        sec_1_DOM = document.querySelector(".sec .card-1"),
-        sec_2_DOM = document.querySelector(".sec .card-2"),
-        name_day = document.querySelector(".day .name"),
-        name_min = document.querySelector(".min .name"),
-        name_hour = document.querySelector(".hour .name"),
-        name_sec = document.querySelector(".sec .name"),
+        day_1_DOM = document.querySelector(".day .card-1"), //первая цифра числа "день"
+        day_2_DOM = document.querySelector(".day .card-2"), //вторая цифра числа "день"
+        day_3_DOM = document.querySelector(".day .card-3"), //третья цифра числа "день"
+        hour_1_DOM = document.querySelector(".hour .card-1"), //первая цифры числа "час"
+        hour_2_DOM = document.querySelector(".hour .card-2"), //вторая цифры числа "час"
+        min_1_DOM = document.querySelector(".min .card-1"), //первая цифры числа "минута"
+        min_2_DOM = document.querySelector(".min .card-2"), //втора цифры числа "минута"
+        sec_1_DOM = document.querySelector(".sec .card-1"), //первая цифры числа "секунда"
+        sec_2_DOM = document.querySelector(".sec .card-2"), //вторая цифры числа "секунда"
+        name_day = document.querySelector(".day .name"), //титл день
+        name_hour = document.querySelector(".hour .name"), //титл часы
+        name_min = document.querySelector(".min .name"), //титл минуты
+        name_sec = document.querySelector(".sec .name"), //титл секунды
         // ==================================================
-        sec, // все остаточное время в секундах
+        sec, // всё остаточное время в секундах
         sc, //текущие секунды
         min, // текущие минуты
         h, // текущие часы
@@ -41,7 +57,7 @@ function stopwatch (...args) {
             min = Math.trunc(sec/60%60);
             h = Math.trunc(sec/3600%24);
             d = Math.trunc(sec/86400);
-            
+
             day_1_DOM.innerHTML = d > 9 ? String(d)[0] : 0;
             hour_1_DOM.innerHTML = h > 9 ? String(h)[0] : 0;
             min_1_DOM.innerHTML = min > 9 ? String(min)[0] : 0;
@@ -52,10 +68,18 @@ function stopwatch (...args) {
             min_2_DOM.innerHTML = min > 9 ? String(min)[1] : min;
             sec_2_DOM.innerHTML = sc > 9 ? String(sc)[1] : sc;
 
-            name_day.innerHTML = d < 5 && d > 0 ? "дня" : "дней";
-            name_hour.innerHTML = h < 5 && h > 0 ? "часа" : "часов";
-            name_min.innerHTML = min < 5 && min > 0 ? "минуты" : "минут";
-            name_sec.innerHTML = sc < 5 && sc > 0 ? "секунды" : "секунд";
+            if (String(d).length > 2) {
+                day_3_DOM.style = "display: block;";
+                document.querySelector(".day").style = "grid-template-columns: 1fr 1fr 1fr;"
+                day_3_DOM.innerHTML = String(d)[2];
+            } else {
+                day_3_DOM.style = "display: none;";
+            }
+
+            name_day.innerHTML = switchWord(d, 'day');
+            name_hour.innerHTML = switchWord(h, 'hour');
+            name_min.innerHTML = switchWord(min, 'minut');
+            name_sec.innerHTML = switchWord(sc, 'second');
             
             if (!d && !h && !min && sc == 10) {
                 countdown = document.createElement("div");
@@ -86,7 +110,7 @@ function stopwatch (...args) {
 
 }
 
-stopwatch(2021,11,"31",23,59,59);
+stopwatch(2022,11,"31",23,59,59);
 
 function ballBounce(e) {
     var i = e;
