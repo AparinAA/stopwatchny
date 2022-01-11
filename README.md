@@ -1,3 +1,3 @@
 ## Welcome to my pp - Stopwatch before New Year
 
-[Page project](https://aparinaa.github.io/stopwatchny/){:target="_blank"}
+<a href="https://aparinaa.github.io/stopwatchny/" target="_blank" rel="noopener">Page project</a>
