@@ -27,7 +27,6 @@ function splitNumber(dom, number, order) {
 //и названия карточки (день,час,...)
 class Card {
     constructor(name) {
-        console.info(name,'.'+name);
         this.name = name;
         this.cardOne = document.querySelector('.' + name + ' .card-1'); //дом элемента карты для цифры 1
         this.cardTwo = document.querySelector('.' + name + ' .card-2'); //дом элемента карты для цифры 2
@@ -73,25 +72,31 @@ function stopwatch (...args) {
                 return;
             }
 
+            //подсчет и инициализация оставшего времени
             sc = Math.trunc(sec%60);
             min = Math.trunc(sec/60%60);
             h = Math.trunc(sec/3600%24);
             d = Math.trunc(sec/86400);
 
+            //заполенение карточек цифрами
+            //оставшимся временем
             day_DOM.fillCard(d);
             hour_DOM.fillCard(h);
             min_DOM.fillCard(min);
             sec_DOM.fillCard(sc);
 
+            //если дней больше 99,
+            //то нужно добавить еще одну карточку
             if (String(d).length > 2) {
                 day_3_DOM.style = "display: block;";
                 document.querySelector(".day").style = "grid-template-columns: 1fr 1fr 1fr;"
                 day_3_DOM.innerHTML = String(d)[2];
-            } else {
+            } else { //скрыть когда дней станет <100
                 day_3_DOM.style = "display: none;";
             }
 
-            if (!d && !h && !min && sc == 10) {
+            //иллюстарация оставших 12 секунд на весь экран
+            if (!d && !h && !min && sc == 12) {
                 countdown = document.createElement("div");
                 countdown.classList.add('countdown');
                 countdown.innerHTML = sc;
@@ -99,62 +104,69 @@ function stopwatch (...args) {
                 document.querySelector('.container').style = 'background-color: rgba(0, 0, 0, 0.363);';
                 document.querySelector('.stopwatch').style = 'opacity: 0.1;';
             } 
-            if (!d && !h && !min && sc < 10) {
+            if (!d && !h && !min && sc < 12) {
                 countdown.innerHTML = sc;
             }
             
+            //финальная заставка и остановка таймера
+            //когда время закончилось
             if (!d && !h && !min && !sc) {
                     if ( document.querySelector('.countdown') ){
                         setTimeout ( () =>{
                             document.querySelector('.countdown').remove();
                             document.querySelector('.feerverk').style.display = block;
+                            document.querySelector('.ny').style.display = block;
                         }
                         ,1000)
                     }
                 clearTimeout(timeId);
             }
-            else{
+            else{//иначе продолжать вызывать таймер через 1сек
                 timeId = setTimeout (tick, 1000, date);
             }
         },0, date);
 
 }
 
-stopwatch(2022,01,"31",23,59,59);
+//Запускаем функцию таймер до нужной нам даты
+stopwatch(2022,00,"12",21,10,00);
 
 function ballBounce(e) {
     var i = e;
     if (e.className.indexOf(" bounce") > -1) {
-      return;
+        return;
     }
     toggleBounce(i);
-  }
-  
+}
+//раскачивание шарика после события
 function toggleBounce(i) {
     i.classList.add("bounce");
     function n() {
         i.classList.remove("bounce");
         i.classList.add("bounce1");
         function o() {
-        i.classList.remove("bounce1");
-        i.classList.add("bounce2");
-        function p() {
-            i.classList.remove("bounce2");
-            i.classList.add("bounce3");
-            function q() {
-            i.classList.remove("bounce3");
+            i.classList.remove("bounce1");
+            i.classList.add("bounce2");
+            function p() {
+                i.classList.remove("bounce2");
+                i.classList.add("bounce3");
+                function q() {
+                    i.classList.remove("bounce3");
+                }
+                setTimeout(q, 500);
             }
-            setTimeout(q, 500);
-        }
-        setTimeout(p, 500);
+            setTimeout(p, 500);
         }
         setTimeout(o, 500);
     }
     setTimeout(n, 500);
 }
 
-var array = document.querySelectorAll('.ball');
+//Собираемся все шарики в массив
+let array = document.querySelectorAll('.ball');
 
+//отлавливаем события на шариках
+//сначала наведение курсора, а потом нажатие на шарик
 for (let i = 0; i < array.length; i++) {
     array[i].addEventListener('mouseenter', function () {
         ballBounce(this);
@@ -165,6 +177,8 @@ for (let i = 0; i < array.length; i++) {
 }
 
 
+//каждые 10секунд рандомный шарик
+//начинается качаться
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
