@@ -1,9 +1,10 @@
-//функция для выбора нужного сколения к словам "секунда, минута, час, день, год" в зависимости от числа
+//вспомогательная функция для выбора 
+//нужного сколения к словам "секунда, минута, час, день, год" в зависимости от числа
 function switchWord (value, word) {
     let value1,
         words = {
             'second' : ['секунда',"секунд", "сенкунды"],
-            'minut' : ['минута', "минут", "минуты"],
+            'minute' : ['минута', "минут", "минуты"],
             'hour' : ['час', "часов", "часа"],
             'day' : ['день',"дней","дня"],
             "year" : ['год', "лет", "года"]
@@ -13,6 +14,33 @@ function switchWord (value, word) {
     value1 = value % 10;
     
     return words[word][ (value > 4 && value < 21 || value1 == 0 || value1 > 4 && value1 < 10) ? 1 : value1 > 1 && value1 < 5 ? 2 : 0 ];
+}
+
+//вспомогательная функция для заполенения
+//первой и второй цифр карточек
+function splitNumber(dom, number, order) {
+    dom.innerHTML = number > 9 ? String(number)[order] : order > 0 ? number : 0;
+}
+
+//класс описывающий карточку с цифрами времени
+//карточка состоит из перой, второй цифры числа
+//и названия карточки (день,час,...)
+class Card {
+    constructor(name) {
+        console.info(name,'.'+name);
+        this.name = name;
+        this.cardOne = document.querySelector('.' + name + ' .card-1'); //дом элемента карты для цифры 1
+        this.cardTwo = document.querySelector('.' + name + ' .card-2'); //дом элемента карты для цифры 2
+        this.cardName = document.querySelector('.' + name + ' .name'); //дом элемента карты для названия
+    }
+
+    //метод заполнения элементов ДОМ в hmtl
+    fillCard(number) {
+        this.cardName.innerHTML = switchWord(number, this.name);
+        splitNumber(this.cardOne, number, 0);
+        splitNumber(this.cardTwo, number, 1);
+    };
+
 }
 
 function stopwatch (...args) {
@@ -25,19 +53,11 @@ function stopwatch (...args) {
     let date = new Date(...args), //дата до которой отсчитывается время
         // DOM-элемнты секундамера
         // ==================================================
-        day_1_DOM = document.querySelector(".day .card-1"), //первая цифра числа "день"
-        day_2_DOM = document.querySelector(".day .card-2"), //вторая цифра числа "день"
+        day_DOM = new Card('day'), //инициализация карточки "дни"
+        hour_DOM = new Card('hour'), //инициализация карточки "часы"
+        min_DOM = new Card('minute'), //инициализация карточки "минуты"
+        sec_DOM = new Card('second'), ////инициализация карточки "секунды"
         day_3_DOM = document.querySelector(".day .card-3"), //третья цифра числа "день"
-        hour_1_DOM = document.querySelector(".hour .card-1"), //первая цифры числа "час"
-        hour_2_DOM = document.querySelector(".hour .card-2"), //вторая цифры числа "час"
-        min_1_DOM = document.querySelector(".min .card-1"), //первая цифры числа "минута"
-        min_2_DOM = document.querySelector(".min .card-2"), //втора цифры числа "минута"
-        sec_1_DOM = document.querySelector(".sec .card-1"), //первая цифры числа "секунда"
-        sec_2_DOM = document.querySelector(".sec .card-2"), //вторая цифры числа "секунда"
-        name_day = document.querySelector(".day .name"), //титл день
-        name_hour = document.querySelector(".hour .name"), //титл часы
-        name_min = document.querySelector(".min .name"), //титл минуты
-        name_sec = document.querySelector(".sec .name"), //титл секунды
         // ==================================================
         sec, // всё остаточное время в секундах
         sc, //текущие секунды
@@ -58,15 +78,10 @@ function stopwatch (...args) {
             h = Math.trunc(sec/3600%24);
             d = Math.trunc(sec/86400);
 
-            day_1_DOM.innerHTML = d > 9 ? String(d)[0] : 0;
-            hour_1_DOM.innerHTML = h > 9 ? String(h)[0] : 0;
-            min_1_DOM.innerHTML = min > 9 ? String(min)[0] : 0;
-            sec_1_DOM.innerHTML = sc > 9 ? String(sc)[0] : 0;
-            
-            day_2_DOM.innerHTML = d > 9 ? String(d)[1] : d;
-            hour_2_DOM.innerHTML = h > 9 ? String(h)[1] : h;
-            min_2_DOM.innerHTML = min > 9 ? String(min)[1] : min;
-            sec_2_DOM.innerHTML = sc > 9 ? String(sc)[1] : sc;
+            day_DOM.fillCard(d);
+            hour_DOM.fillCard(h);
+            min_DOM.fillCard(min);
+            sec_DOM.fillCard(sc);
 
             if (String(d).length > 2) {
                 day_3_DOM.style = "display: block;";
@@ -76,11 +91,6 @@ function stopwatch (...args) {
                 day_3_DOM.style = "display: none;";
             }
 
-            name_day.innerHTML = switchWord(d, 'day');
-            name_hour.innerHTML = switchWord(h, 'hour');
-            name_min.innerHTML = switchWord(min, 'minut');
-            name_sec.innerHTML = switchWord(sc, 'second');
-            
             if (!d && !h && !min && sc == 10) {
                 countdown = document.createElement("div");
                 countdown.classList.add('countdown');
@@ -110,7 +120,7 @@ function stopwatch (...args) {
 
 }
 
-stopwatch(2022,11,"31",23,59,59);
+stopwatch(2022,01,"31",23,59,59);
 
 function ballBounce(e) {
     var i = e;
@@ -149,9 +159,6 @@ for (let i = 0; i < array.length; i++) {
     array[i].addEventListener('mouseenter', function () {
         ballBounce(this);
     });
-}
-
-for (let i = 0; i < array.length; i++) {
     array[i].addEventListener('click', function () {
         ballBounce(this);
     });
