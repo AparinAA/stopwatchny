@@ -129,7 +129,7 @@ function stopwatch (...args) {
 }
 
 //Запускаем функцию таймер до нужной нам даты
-stopwatch(2022,00,"12",21,10,00);
+stopwatch(2022,11,"31",23,59,59);
 
 function ballBounce(e) {
     var i = e;
